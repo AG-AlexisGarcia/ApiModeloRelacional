@@ -1,0 +1,93 @@
+/*
+=========================================
+      TABLAS Y COLUMNAS (DIAGRAMA ER)
+=========================================
+
+* PROFESOR: 
+  - ID_PROFESOR (PK)
+  - NOMBRE (NN)
+  - APELLIDOS (NN)
+  - DNI (UK)
+  - EMAIL_CENTRO
+  - EMAIL_PERSONAL
+  - TELEFONO_PERSONAL
+  - ID_DEPARTAMENTO (FK)
+  - DESCRIPCION
+  - TELEFONO
+
+* DEPARTAMENTO: 
+  - ID_DEPARTAMENTO (PK)
+  - CODIGO (UK, NN)
+  - NOMBRE (NN)
+
+* MODULO: 
+  - ID_MODULO (PK)
+  - CODIGO (UK, NN)
+  - DIMINUTIVO (UK, NN)
+  - NOMBRE
+  - DESCRIPCION
+  - HORAS_SEMANALES
+  - CREDITOS
+
+* CURSO: 
+  - ID_CURSO (PK)
+  - DIMINUTIVO (UK, NN)
+  - DESCRIPCION
+
+* TITULACION: 
+  - ID_TITULACION (PK)
+  - CODIGO (UK, NN)
+  - DIMINUTIVO (UK, NN)
+  - HORAS_TOTALES
+
+* ALUMNO: 
+  - ID_ALUMNO (PK)
+  - NOMBRE (NN)
+  - APELLIDOS (NN)
+  - DNI (UK, NN)
+  - NUMERO_SS (UK)
+  - EMAIL_PERSONAL
+  - TELEFONO_PERSONAL
+  - FECHA_ALTA (NN)
+  - FECHA_BAJA
+  - EMAIL_CENTRO
+  - ID_FAMILIA (FK)
+
+* FAMILIA: 
+  - ID_FAMILIA (PK)
+  - NOMBRE_PADRE, NOMBRE_MADRE
+  - APELLIDOS_PADRES, APELLIDOS_MADRES
+  - EMAIL_PADRE, EMAIL_MADRE
+  - TELEFONO_PADRE, TELEFONO_MADRE
+  - DIRECCION_PADRE, DIRECCION_MADRE
+  - CODIGO_POSTAL_PADRE, CODIGO_POSTAL_MADRE
+  - MUNICIPIO_PADRE, MUNICIPIO_MADRE
+  - PROVINCIA_PADRE, PROVINCIA_MADRE
+  - SON_SEPARADOS (BOOLEAN)
+  - ES_COMPARTIDA, ES_PADRE, ES_MADRE
+
+* ESTADO: 
+  - ID_ESTADO (PK)
+  - NOMBRE (NN)
+  - DESCRIPCION
+
+* TABLAS INTERMEDIAS:
+  - PROFESOR_IMPARTE: ID_PROFESOR (FK), ID_MODULO (FK)
+  - MODULO_CURSO: ID_MODULO (FK), ID_CURSO (FK)
+  - MATRICULA: ID_ALUMNO (FK), ID_MODULO (FK), ID_ESTADO (FK)
+
+
+=========================================
+               RELACIONES
+=========================================
+
+PROFESOR --(N:1)-- pertenece --(1)-- DEPARTAMENTO
+PROFESOR --(N:M)-- imparte   --(N:M)-- MODULO
+MODULO   --(N:M)-- pertenece --(N:M)-- CURSO
+CURSO    --(N:1)-- pertenece --(1)-- TITULACION
+ALUMNO   --(N:1)-- acompaña  --(1)-- FAMILIA
+ALUMNO   --(N:M)-- matricula --(N:M)-- MODULO (Incluye relación N:1 con ESTADO)
+
+Leyenda: 
+PK = Primary Key | FK = Foreign Key | NN = Not Null | UK = Unique Key
+*/
