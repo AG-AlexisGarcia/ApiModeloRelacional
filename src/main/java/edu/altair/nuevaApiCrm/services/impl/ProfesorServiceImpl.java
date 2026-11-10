@@ -13,54 +13,11 @@ import edu.altair.nuevaApiCrm.services.ProfesorService;
 @Service
 public class ProfesorServiceImpl implements ProfesorService {
 
-<<<<<<< HEAD
     private final ProfesorRepository profesorRepository;
 
     public ProfesorServiceImpl(ProfesorRepository profesorRepository) {
         this.profesorRepository = profesorRepository;
     }
-=======
-	
-	private final ProfesorRepository profesorRepository;
-	
-	public ProfesorServiceImpl(ProfesorRepository profesorRepository) {
-		this.profesorRepository = profesorRepository;
-	}
-	
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<ProfesorResponseDto> obtenerTodos() {
-		return profesorRepository.findAll()
-				.stream()
-				.map(this::mapToResponseDto)
-				.toList();
-	}
-
-	@Override
-	public ProfesorResponseDto crear(ProfesorRequestDto dto) {
-		 if(profesorRepository.existsByDni(dto.dniProfesor())) {
-			 throw new DniAlreadyExistException("Ya existe un profesor con este DNI: " + dto.dniProfesor());
-		 }
-		 Profesor nuevoProfesor = new Profesor(
-				 dto.idProfesor(),
-				 dto.nombreProfesor(),
-				 dto.apellidosProfesor(),
-				 dto.dniProfesor(),
-				 dto.emailCentroProfesor(),
-				 dto.emailPerosnalProfesor(),
-				 dto.telefonoProfesor(),
-				 dto.descripcionProfesor()
-				 
-				 );
-				 
-				 
-				 
-		Profesor guardado = profesorRepository.save(nuevoProfesor);
-				 
-		return mapToResponseDto(guardado);
-	}
->>>>>>> 0dd4be686c76fda7d028f1c903b1a86953af8b96
 
     @Override
     @Transactional(readOnly = true)

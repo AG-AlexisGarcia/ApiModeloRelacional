@@ -1,0 +1,176 @@
+### 1. Listar todos los profesores (inicialmente vacío)
+GET http://localhost:8080/api/profesores
+Accept: application/json
+
+###
+
+### 2. Crear un profesor nuevo
+POST http://localhost:8080/api/profesores
+Content-Type: application/json
+
+{
+  "idProfesor": null,
+  "nombreProfesor": "Alexis67",
+  "apellidosProfesor": "García",
+  "dni": "12349678A",
+  "emailCentroProfesor": "alexis@altair.edu",
+  "emailPersonalProfesor": "alexis@gmail.com",
+  "descripcionProfesor": "Profesor de prueba inicial",
+  "telefonoProfesor": "600112233"
+}
+
+###
+
+### 3. Obtener el profesor creado por ID
+GET http://localhost:8080/api/profesores/1
+Accept: application/json
+
+###
+
+### 4. Actualizar profesor
+PUT http://localhost:8080/api/profesores/1
+Content-Type: application/json
+
+{
+  "idProfesor": 1,
+  "nombreProfesor": "Alexis",
+  "apellidosProfesor": "García Elías",
+  "dni": "12345678A",
+  "emailCentroProfesor": "alexis@altair.edu",
+  "emailPersonalProfesor": "alexis@gmail.com",
+  "descripcionProfesor": "Profesor actualizado",
+  "telefonoProfesor": "699887766"
+}
+
+###
+
+### 5. Eliminar profesor
+DELETE http://localhost:8080/api/profesores/3
+
+### 6. Listar Departamentos
+GET http://localhost:8080/api/departamentos
+Accept: application/json
+
+### 7. Crear Departamento
+POST http://localhost:8080/api/departamentos
+Content-Type: application/json
+
+{
+  "codigo": "INFo",
+  "nombre": "Informática y Comunicaciones"
+}
+
+### 8. Obtener Departamento por ID
+GET http://localhost:8080/api/departamentos/1
+Accept: application/json
+
+
+
+
+
+### 9. Crear Módulo de prueba
+POST http://localhost:8080/api/modulos
+Content-Type: application/json
+
+{
+  "codigo": "0612",
+  "diminutivo": "DWS",
+  "nombre": "Desarrollo Web en Entorno Servidor",
+  "descripcion": "Spring Boot y persistencia de datos",
+  "horasSemanales": 8,
+  "creditos": 12
+}
+
+### 10. Listar Módulos
+GET http://localhost:8080/api/modulos
+Accept: application/json
+
+
+### 11. Crear Curso
+POST http://localhost:8080/api/cursos
+Content-Type: application/json
+
+{
+  "diminutivo": "2DAW",
+  "descripcion": "Segundo curso de Desarrollo de Aplicaciones Web"
+}
+
+### 12. Listar Cursos
+GET http://localhost:8080/api/cursos
+Accept: application/json
+
+
+### 13. Crear Titulación
+POST http://localhost:8080/api/titulaciones
+Content-Type: application/json
+
+{
+  "codigo": "FP-DAW",
+  "diminutivo": "DAW",
+  "horasTotales": 2000
+}
+
+### 14. Listar Titulaciones
+GET http://localhost:8080/api/titulaciones
+Accept: application/json
+
+
+### 15. Crear Estado
+POST http://localhost:8080/api/estados
+Content-Type: application/json
+
+{
+  "nombre": "Matriculado",
+  "descripcion": "Alumno dado de alta y cursando el año lectivo"
+}
+
+### 16. Listar Estados
+GET http://localhost:8080/api/estados
+Accept: application/json
+
+### Crear Familia
+POST http://localhost:8080/api/familias
+Content-Type: application/json
+
+{
+  "nombrePadre": "Antonio",
+  "nombreMadre": "María",
+  "apellidosPadres": "García",
+  "apellidosMadres": "López",
+  "emailPadre": "antonio@gmail.com",
+  "emailMadre": "maria@gmail.com",
+  "telefonoPadre": "611222333",
+  "telefonoMadre": "644555666",
+  "direccionPadre": "Calle Real 12",
+  "direccionMadre": "Calle Real 12",
+  "codigoPostalPadre": "41020",
+  "codigoPostalMadre": "41020",
+  "municipioPadre": "Sevilla",
+  "municipioMadre": "Sevilla",
+  "provinciaPadre": "Sevilla",
+  "provinciaMadre": "Sevilla",
+  "sonSeparados": false,
+  "esCompartida": false,
+  "esPadre": true,
+  "esMadre": true
+}
+
+### Crear Alumno
+POST http://localhost:8080/api/alumnos
+Content-Type: application/json
+
+{
+  "nombre": "Carlos",
+  "apellidos": "García López",
+  "dni": "87654321Z",
+  "numeroSs": "411234567890",
+  "emailPersonal": "carlos@gmail.com",
+  "telefonoPersonal": "622334455",
+  "fechaAlta": "2026-09-15",
+  "fechaBaja": null,
+  "emailCentro": "carlos.garcia@altair.edu"
+}
+
+### Listar Alumnos
+GET http://localhost:8080/api/alumnos
+Accept: application/json

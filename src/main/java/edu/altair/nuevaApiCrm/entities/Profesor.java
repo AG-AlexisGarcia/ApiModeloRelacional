@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import java.util.List;
 
 @Entity
 @Table(name = "profesores", schema = "crm", uniqueConstraints = {
@@ -44,21 +45,16 @@ public class Profesor {
 	@Column(name = "telefono", length = 15)
 	private String telefonoProfesor;
 
-	/*
-	 * @ManyToOne(optional = true)
-	 * 
-	 * @JoinColumn(name = "id_departamento", nullable = false)
-	 * //private Departamento departamento;
-	 * 
-	 * @ManyToMany
-	 * 
-	 * @JoinTable(
-	 * name = "profesor_imparte",
-	 * joinColumns = @JoinColumn(name = "id_profesor"),
-	 * inverseJoinColumns = @JoinColumn(name = "id_modulo")
-	 * )
-	 * private list<Modulo> modulos;
-	 */
+	@ManyToOne(optional = true)
+
+	@JoinColumn(name = "id_departamento", nullable = false)
+	 private Departamento departamento;
+
+	//@ManyToMany
+
+	//@JoinTable(name = "profesor_imparte", joinColumns = @JoinColumn(name = "id_profesor"), inverseJoinColumns = @JoinColumn(name = "id_modulo"))
+	 //private List<Modulo> modulos;
+
 	public Profesor() {
 	}
 
