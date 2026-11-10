@@ -1,12 +1,15 @@
-package edu.altair.nuevaApiCrm.services.impl; // Ajusta a tu paquete real
+package edu.altair.nuevaApiCrm.services.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.altair.nuevaApiCrm.dtos.DepartamentoResponseDto;
 import edu.altair.nuevaApiCrm.dtos.ProfesorRequestDto;
 import edu.altair.nuevaApiCrm.dtos.ProfesorResponseDto;
+import edu.altair.nuevaApiCrm.entities.Departamento;
 import edu.altair.nuevaApiCrm.entities.Profesor;
+import edu.altair.nuevaApiCrm.repositories.DepartamentoRepository;
 import edu.altair.nuevaApiCrm.repositories.ProfesorRepository;
 import edu.altair.nuevaApiCrm.services.ProfesorService;
 
@@ -14,9 +17,11 @@ import edu.altair.nuevaApiCrm.services.ProfesorService;
 public class ProfesorServiceImpl implements ProfesorService {
 
     private final ProfesorRepository profesorRepository;
+    private final DepartamentoRepository departamentoRepository;
 
-    public ProfesorServiceImpl(ProfesorRepository profesorRepository) {
+    public ProfesorServiceImpl(ProfesorRepository profesorRepository, DepartamentoRepository departamentoRepository) {
         this.profesorRepository = profesorRepository;
+        this.departamentoRepository = departamentoRepository;
     }
 
     @Override
@@ -40,13 +45,7 @@ public class ProfesorServiceImpl implements ProfesorService {
     @Transactional
     public ProfesorResponseDto crear(ProfesorRequestDto requestDto) {
         Profesor nuevoProfesor = new Profesor();
-        nuevoProfesor.setNombreProfesor(requestDto.nombreProfesor());
-        nuevoProfesor.setApellidosProfesor(requestDto.apellidosProfesor());
-        nuevoProfesor.setDni(requestDto.dni());
-        nuevoProfesor.setEmailCentroProfesor(requestDto.emailCentroProfesor());
-        nuevoProfesor.setEmailPersonalProfesor(requestDto.emailPersonalProfesor());
-        nuevoProfesor.setTelefonoProfesor(requestDto.telefonoProfesor());
-        nuevoProfesor.setDescripcionProfesor(requestDto.descripcionProfesor());
+        mapearCampos(nuevoProfesor, requestDto);
 
         Profesor guardado = profesorRepository.save(nuevoProfesor);
         return mapToResponseDto(guardado);
@@ -58,13 +57,7 @@ public class ProfesorServiceImpl implements ProfesorService {
         Profesor profesorExistente = profesorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Profesor no encontrado con ID: " + id));
 
-        profesorExistente.setNombreProfesor(requestDto.nombreProfesor());
-        profesorExistente.setApellidosProfesor(requestDto.apellidosProfesor());
-        profesorExistente.setDni(requestDto.dni());
-        profesorExistente.setEmailCentroProfesor(requestDto.emailCentroProfesor());
-        profesorExistente.setEmailPersonalProfesor(requestDto.emailPersonalProfesor());
-        profesorExistente.setTelefonoProfesor(requestDto.telefonoProfesor());
-        profesorExistente.setDescripcionProfesor(requestDto.descripcionProfesor());
+        mapearCampos(profesorExistente, requestDto);
 
         Profesor actualizado = profesorRepository.save(profesorExistente);
         return mapToResponseDto(actualizado);
@@ -79,8 +72,34 @@ public class ProfesorServiceImpl implements ProfesorService {
         profesorRepository.deleteById(id);
     }
 
-    // Método privado de mapeo Entity -> DTO
+    private void mapearCampos(Profesor p, ProfesorRequestDto dto) {
+        p.setNombreProfesor(dto.nombreProfesor());
+        p.setApellidosProfesor(dto.apellidosProfesor());
+        p.setDni(dto.dni());
+        p.setEmailCentroProfesor(dto.emailCentroProfesor());
+        p.setEmailPersonalProfesor(dto.emailPersonalProfesor());
+        p.setTelefonoProfesor(dto.telefonoProfesor());
+        p.setDescripcionProfesor(dto.descripcionProfesor());
+
+        if (dto.idDepartamento() != null) {
+            Departamento dep = departamentoRepository.findById(dto.idDepartamento())
+                    .orElse(null);
+            p.setDepartamento(dep);
+        } else {
+            p.setDepartamento(null);
+        }
+    }
+
     private ProfesorResponseDto mapToResponseDto(Profesor profesor) {
+        DepartamentoResponseDto depDto = null;
+        if (profesor.getDepartamento() != null) {
+            depDto = new DepartamentoResponseDto(
+                    profesor.getDepartamento().getIdDepartamento(),
+                    profesor.getDepartamento().getCodigo(),
+                    profesor.getDepartamento().getNombre()
+            );
+        }
+
         return new ProfesorResponseDto(
                 profesor.getIdProfesor(),
                 profesor.getNombreProfesor(),
@@ -89,7 +108,8 @@ public class ProfesorServiceImpl implements ProfesorService {
                 profesor.getEmailCentroProfesor(),
                 profesor.getEmailPersonalProfesor(),
                 profesor.getDescripcionProfesor(),
-                profesor.getTelefonoProfesor()
+                profesor.getTelefonoProfesor(),
+                depDto
         );
     }
 }

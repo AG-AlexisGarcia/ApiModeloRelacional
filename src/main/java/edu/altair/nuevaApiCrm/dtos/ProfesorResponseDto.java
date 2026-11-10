@@ -8,7 +8,6 @@ public record ProfesorResponseDto(
     String emailCentroProfesor,
     String emailPersonalProfesor,
     String descripcionProfesor,
-    String telefonoProfesor
+    String telefonoProfesor,
+    DepartamentoResponseDto departamento
 ) {}
-
-

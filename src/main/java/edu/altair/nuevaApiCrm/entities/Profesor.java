@@ -6,141 +6,64 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import java.util.List;
 
 @Entity
 @Table(name = "profesores", schema = "crm", uniqueConstraints = {
-		@UniqueConstraint(name = "uk_profesores_dni", columnNames = "dni")
+    @UniqueConstraint(name = "uk_profesores_dni", columnNames = "dni")
 })
-
 public class Profesor {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_profesor")
-	private long idProfesor;
 
-	@Column(name = "nombre", nullable = false, length = 100)
-	private String nombreProfesor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_profesor")
+    private Long idProfesor;
 
-	@Column(name = "apellidos", nullable = false, length = 100)
-	private String apellidosProfesor;
+    @Column(name = "nombre", nullable = false, length = 100)
+    private String nombreProfesor;
 
-	@Column(name = "dni", nullable = false, length = 9)
-	private String dni;
+    @Column(name = "apellidos", nullable = false, length = 100)
+    private String apellidosProfesor;
 
-	@Column(name = "email_centro", length = 100)
-	private String emailCentroProfesor;
+    @Column(name = "dni", nullable = false, length = 9)
+    private String dni;
 
-	@Column(name = "email_personal")
-	private String emailPersonalProfesor;
+    @Column(name = "email_centro", length = 100)
+    private String emailCentroProfesor;
 
-	@Column(name = "descripción", length = 400)
-	private String descripcionProfesor;
+    @Column(name = "email_personal")
+    private String emailPersonalProfesor;
 
-	@Column(name = "telefono", length = 15)
-	private String telefonoProfesor;
+    @Column(name = "descripción", length = 400)
+    private String descripcionProfesor;
 
-	@ManyToOne(optional = true)
+    @Column(name = "telefono", length = 15)
+    private String telefonoProfesor;
 
-	@JoinColumn(name = "id_departamento", nullable = false)
-	 private Departamento departamento;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "id_departamento")
+    private Departamento departamento;
 
-	//@ManyToMany
+    public Profesor() {}
 
-	//@JoinTable(name = "profesor_imparte", joinColumns = @JoinColumn(name = "id_profesor"), inverseJoinColumns = @JoinColumn(name = "id_modulo"))
-	 //private List<Modulo> modulos;
-
-	public Profesor() {
-	}
-
-	public Profesor(long idProfesor, String nombreProfesor, String apellidosProfesor, String dni,
-			String emailCentroProfesor, String emailPersonalProfesor, String descripcionProfesor,
-			String telefonoProfesor) { // Departamento departamento) {
-		super();
-		this.idProfesor = idProfesor;
-		this.nombreProfesor = nombreProfesor;
-		this.apellidosProfesor = apellidosProfesor;
-		this.dni = dni;
-		this.emailCentroProfesor = emailCentroProfesor;
-		this.emailPersonalProfesor = emailPersonalProfesor;
-		this.descripcionProfesor = descripcionProfesor;
-		this.telefonoProfesor = telefonoProfesor;
-		// this.departamento = departamento;
-	}
-
-	public long getIdProfesor() {
-		return idProfesor;
-	}
-
-	public String getNombreProfesor() {
-		return nombreProfesor;
-	}
-
-	public void setNombreProfesor(String nombreProfesor) {
-		this.nombreProfesor = nombreProfesor;
-	}
-
-	public String getApellidosProfesor() {
-		return apellidosProfesor;
-	}
-
-	public void setApellidosProfesor(String apellidosProfesor) {
-		this.apellidosProfesor = apellidosProfesor;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
-	public String getEmailCentroProfesor() {
-		return emailCentroProfesor;
-	}
-
-	public void setEmailCentroProfesor(String emailCentroProfesor) {
-		this.emailCentroProfesor = emailCentroProfesor;
-	}
-
-	public String getEmailPersonalProfesor() {
-		return emailPersonalProfesor;
-	}
-
-	public void setEmailPersonalProfesor(String emailPersonal) {
-		this.emailPersonalProfesor = emailPersonal;
-	}
-
-	public String getDescripcionProfesor() {
-		return descripcionProfesor;
-	}
-
-	public void setDescripcionProfesor(String descripcionProfesor) {
-		this.descripcionProfesor = descripcionProfesor;
-	}
-
-	public String getTelefonoProfesor() {
-		return telefonoProfesor;
-	}
-
-	public void setTelefonoProfesor(String telefonoProfesor) {
-		this.telefonoProfesor = telefonoProfesor;
-	}
-	/*
-	 * public Departamento getDepartamento() {
-	 * return departamento;
-	 * }
-	 * 
-	 * public void setDepartamento(Departamento departamento) {
-	 * this.departamento = departamento;
-	 * }
-	 * 
-	 */
-
+    public Long getIdProfesor() { return idProfesor; }
+    public void setIdProfesor(Long idProfesor) { this.idProfesor = idProfesor; }
+    public String getNombreProfesor() { return nombreProfesor; }
+    public void setNombreProfesor(String nombreProfesor) { this.nombreProfesor = nombreProfesor; }
+    public String getApellidosProfesor() { return apellidosProfesor; }
+    public void setApellidosProfesor(String apellidosProfesor) { this.apellidosProfesor = apellidosProfesor; }
+    public String getDni() { return dni; }
+    public void setDni(String dni) { this.dni = dni; }
+    public String getEmailCentroProfesor() { return emailCentroProfesor; }
+    public void setEmailCentroProfesor(String emailCentroProfesor) { this.emailCentroProfesor = emailCentroProfesor; }
+    public String getEmailPersonalProfesor() { return emailPersonalProfesor; }
+    public void setEmailPersonalProfesor(String emailPersonalProfesor) { this.emailPersonalProfesor = emailPersonalProfesor; }
+    public String getDescripcionProfesor() { return descripcionProfesor; }
+    public void setDescripcionProfesor(String descripcionProfesor) { this.descripcionProfesor = descripcionProfesor; }
+    public String getTelefonoProfesor() { return telefonoProfesor; }
+    public void setTelefonoProfesor(String telefonoProfesor) { this.telefonoProfesor = telefonoProfesor; }
+    public Departamento getDepartamento() { return departamento; }
+    public void setDepartamento(Departamento departamento) { this.departamento = departamento; }
 }
