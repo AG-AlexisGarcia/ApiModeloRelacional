@@ -1,17 +1,17 @@
 package edu.altair.nuevaApiCrm.dtos;
 
-import edu.altair.nuevaApiCrm.entities.Departamento;
+//import edu.altair.nuevaApiCrm.entities.Departamento;
 
 public record ProfesorRequestDto(
-		long idProfesor, 
+		Long idProfesor, 
 		String nombreProfesor, 
 		String apellidosProfesor, 
-		String dniProfesor,
+		String dni,
 		String emailCentroProfesor, 
-		String emailPerosnalProfesor, 
+		String emailPersonalProfesor, 
 		String descripcionProfesor,
-		String telefonoProfesor,
-		Departamento departamento
+		String telefonoProfesor
+		//Departamento departamento
 ) {}
 
 
